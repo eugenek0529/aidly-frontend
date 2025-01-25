@@ -1,8 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    setIsUserMenuOpen(false);
+  };
 
   return (
     <div className="w-full px-4 absolute top-0 left-0 right-0">
@@ -13,7 +21,7 @@ function Navbar() {
               Aidly Beta
             </Link>
             <div className="flex items-center gap-4">
-              {/* Dropdown Menu */}
+              {/* Disasters Dropdown Menu */}
               <div 
                 className="relative group"
                 onMouseEnter={() => setIsOpen(true)}
@@ -48,18 +56,54 @@ function Navbar() {
               </div>
 
               <div className="h-6 w-[1px] bg-gray-400/30"></div>
-              <Link 
-                to="/login" 
-                className="px-4 py-2 text-sm font-medium bg-white rounded-md text-black border border-gray-400 hover:text-[#ff0000] transition-colors"
-              >
-                Login
-              </Link>
-              <Link 
-                to="/signup" 
-                className="px-4 py-2 text-sm font-medium text-white bg-[#222222] rounded-md hover:bg-black/80 transition-colors"
-              >
-                Sign Up
-              </Link>
+              
+              {user ? (
+                // User Profile Icon and Dropdown
+                <div 
+                  className="relative group"
+                  onMouseEnter={() => setIsUserMenuOpen(true)}
+                  onMouseLeave={() => setIsUserMenuOpen(false)}
+                >
+                  <button 
+                    className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300 transition-colors"
+                  >
+                    <span className="text-black text-sm">
+                      {user.email ? user.email[0].toUpperCase() : 'U'}
+                    </span>
+                  </button>
+                  
+                  {isUserMenuOpen && (
+                    <div className="absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                      <div className="absolute h-3 w-full -top-3"></div>
+                      <div className="px-4 py-2 text-sm text-gray-700 border-b">
+                        {user.email}
+                      </div>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                // Login and Signup buttons
+                <>
+                  <Link 
+                    to="/login" 
+                    className="px-4 py-2 text-sm font-medium bg-white rounded-md text-black border border-gray-400 hover:text-[#ff0000] transition-colors"
+                  >
+                    Login
+                  </Link>
+                  <Link 
+                    to="/signup" 
+                    className="px-4 py-2 text-sm font-medium text-white bg-[#222222] rounded-md hover:bg-black/80 transition-colors"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

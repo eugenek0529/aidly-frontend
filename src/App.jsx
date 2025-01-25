@@ -1,24 +1,49 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import axios from 'axios'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+  Outlet
+} from 'react-router-dom'
+
+// Pages  
 import Home from './pages/Home'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Testpage from './pages/testpage/Testpage'
+
+// Components
 import Navbar from './components/Navbar'
 
-function App() {
+// Configure axios defaults
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://localhost:5174/api';
+
+// Root layout component
+const Root = () => {
   return (
-    <Router>
-      <div className="min-h-screen bg-[#FFFFFF]">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/testpage" element={<Testpage />} />
-        </Routes>
-      </div>
-    </Router>
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
+};
+
+// Router configuration
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<Root />}>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/testpage" element={<Testpage />} />
+    </Route>
   )
+);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App
