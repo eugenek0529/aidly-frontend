@@ -6,12 +6,14 @@ import {
   Route,
   Outlet
 } from 'react-router-dom'
+import 'maplibre-gl/dist/maplibre-gl.css'
 
 // Pages  
 import Home from './pages/Home'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import Testpage from './pages/testpage/Testpage'
+//import PostForm from './pages/forms/PostForm'
 
 // Components
 import Navbar from './components/Navbar'
@@ -38,6 +40,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/testpage" element={<Testpage />} />
+      {/* <Route path="/create-post" element={<PostForm />} /> */}
     </Route>
   )
 );
