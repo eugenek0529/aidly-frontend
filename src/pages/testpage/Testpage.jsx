@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import MapDisplay from '../../components/MapDisplay';
+import ListSection from '../../components/ListSection';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -93,19 +94,10 @@ function Testpage() {
           </div>
 
           {/* List Content */}
-          <div className="space-y-4">
-            {activeView === 'find' ? (
-              <div>
-                {/* Find Help content */}
-                <p>Find Help Content Coming Soon</p>
-              </div>
-            ) : (
-              <div>
-                {/* Give Help content */}
-                <p>Give Help Content Coming Soon</p>
-              </div>
-            )}
-          </div>
+         
+            
+            <ListSection activeView={activeView} />
+          
         </div>
       </div>
     </div>
