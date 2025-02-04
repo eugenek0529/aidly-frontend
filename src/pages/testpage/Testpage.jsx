@@ -1,8 +1,20 @@
 import { useState } from 'react';
 import MapDisplay from '../../components/MapDisplay';
-function Testpage() {
-  const [activeView, setActiveView] = useState('find'); // 'find' or 'give'
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
+function Testpage() {
+  const [activeView, setActiveView] = useState('find');
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handlePostClick = () => {
+    if (activeView === 'find') {
+      navigate('/request-help');  // Navigate to help request form
+    } else {
+      navigate('/post-help');     // Navigate to help offer form
+    }
+  };
 
   const eventLocations = [
     {
@@ -24,7 +36,7 @@ function Testpage() {
       <div className="md:flex md:flex-row-reverse">
         {/* Map Section */}
         <div className="w-full h-[40vh] md:h-[calc(100vh-64px)] md:w-1/2">
-        <MapDisplay locations={eventLocations} />
+          <MapDisplay locations={eventLocations} />
         </div>
 
         {/* List Section */}
@@ -62,18 +74,37 @@ function Testpage() {
                   ? 'Browse and respond to help requests' 
                   : 'Create and manage help offers'}
               </p>
-              {activeView === 'find' ? (
-                <button className="px-4 py-2 text-sm font-medium text-white bg-[#1397e9] rounded-md hover:bg-[#1397e9]/90 transition-colors">
-                  Ask for Help
+              {user ? (
+                <button 
+                  className="px-4 py-2 text-sm font-medium text-white bg-[#1397e9] rounded-md hover:bg-[#1397e9]/90 transition-colors"
+                  onClick={handlePostClick}
+                >
+                  {activeView === 'find' ? 'Ask for Help' : 'Post Help'}
                 </button>
               ) : (
                 <button 
-                  className="px-4 py-2 text-sm font-medium text-white bg-[#1397e9] rounded-md hover:bg-[#1397e9]/90 transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-[#1397e9] hover:text-[#1397e9]/90 transition-colors"
+                  onClick={() => navigate('/login')}
                 >
-                  Post Help
+                  Sign in to {activeView === 'find' ? 'ask for help' : 'post help'}
                 </button>
               )}
             </div>
+          </div>
+
+          {/* List Content */}
+          <div className="space-y-4">
+            {activeView === 'find' ? (
+              <div>
+                {/* Find Help content */}
+                <p>Find Help Content Coming Soon</p>
+              </div>
+            ) : (
+              <div>
+                {/* Give Help content */}
+                <p>Give Help Content Coming Soon</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

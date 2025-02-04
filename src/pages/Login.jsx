@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function Login() {
@@ -70,6 +70,19 @@ function Login() {
             {loading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
+
+        {/* Sign up prompt */}
+        <div className="mt-6 text-center">
+          <p className="text-gray-600">
+            First time here?{' '}
+            <Link 
+              to="/signup" 
+              className="text-[#1397e9] hover:text-[#1397e9]/90 font-medium"
+            >
+              Create an account
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

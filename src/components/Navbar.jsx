@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import aidlyLogo from '../assets/aidly.png'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,8 +18,15 @@ function Navbar() {
       <nav className="max-w-[90%] mx-auto mt-4 bg-black/10 backdrop-blur-sm text-white rounded-xl p-1">
         <div className="px-6">
           <div className="flex justify-between items-center h-16">
-            <Link to="/" className="text-xl font-semibold text-black">
-              Aidly Beta
+            <Link to="/" className="flex items-center gap-2">
+              <img 
+                src={aidlyLogo}
+                alt="Aidly Logo" 
+                className="h-6 w-auto"
+              />
+              <span className="text-xl font-semibold text-black">
+                Aidly Beta
+              </span>
             </Link>
             <div className="flex items-center gap-4">
               {/* Disasters Dropdown Menu */}
