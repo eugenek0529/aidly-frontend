@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { AuthProvider } from './context/AuthContext'
 import { Toaster } from 'react-hot-toast'
@@ -20,34 +20,47 @@ import ProtectedRoute from './routes/ProtectedRoutes'
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://localhost:5174/api';
 
+// Wrapper component to handle navbar visibility
+function AppContent() {
+  const location = useLocation();
+  const hideNavbarPaths = ['/post-help', '/request-help'];
+  const shouldShowNavbar = !hideNavbarPaths.includes(location.pathname);
+
+  return (
+    <>
+      {shouldShowNavbar && <Navbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/testpage" element={<Testpage />} />
+        <Route 
+          path="/request-help" 
+          element={
+            <ProtectedRoute>
+              <RequestHelpForm />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/post-help" 
+          element={
+            <ProtectedRoute>
+              <PostHelpForm />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+    </>
+  );
+}
+
 function App() {
   return (
     <AuthProvider>
       <Toaster position="top-center" />
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/testpage" element={<Testpage />} />
-          <Route 
-            path="/request-help" 
-            element={
-              <ProtectedRoute>
-                <RequestHelpForm />
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/post-help" 
-            element={
-              <ProtectedRoute>
-                <PostHelpForm />
-              </ProtectedRoute>
-            } 
-          />
-        </Routes>
+        <AppContent />
       </Router>
     </AuthProvider>
   );
