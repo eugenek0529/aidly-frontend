@@ -72,8 +72,8 @@ function Testpage() {
             <div className="flex items-center justify-between">
               <p className="text-gray-600 text-sm">
                 {activeView === 'find' 
-                  ? 'Browse and respond to help requests' 
-                  : 'Create and manage help offers'}
+                  ? 'Browse help requests. Ask for help you need.' 
+                  : 'Browse help offers. Post help to those in need. Report ongoing help offers.'}
               </p>
               {user ? (
                 <button 

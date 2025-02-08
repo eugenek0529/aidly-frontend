@@ -28,7 +28,13 @@ function Navbar() {
                 Aidly Beta
               </span>
             </Link>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+            <Link
+                to="/about"
+                className="px-3 py-2 text-sm font-medium text-black hover:text-[#ff0000] transition-colors"
+              >
+                About
+              </Link>
               {/* Disasters Dropdown Menu */}
               <div 
                 className="relative group"
@@ -112,6 +118,8 @@ function Navbar() {
                   </Link>
                 </>
               )}
+
+              
             </div>
           </div>
         </div>

@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp'
 import Testpage from './pages/testpage/Testpage'
 import RequestHelpForm from './components/RequestHelpForm'
 import PostHelpForm from './components/PostHelpForm'
+import About from './pages/About'
 
 // Components
 import Navbar from './components/Navbar'
@@ -34,6 +35,7 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/testpage" element={<Testpage />} />
+        <Route path="/about" element={<About />} />
         <Route 
           path="/request-help" 
           element={
