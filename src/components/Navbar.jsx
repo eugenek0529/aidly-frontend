@@ -14,7 +14,7 @@ function Navbar() {
   };
 
   return (
-    <div className="w-full px-4 absolute top-0 left-0 right-0">
+    <div className="w-full px-4 absolute top-0 left-0 right-0 z-50">
       <nav className="max-w-[90%] mx-auto mt-4 bg-black/10 backdrop-blur-sm text-white rounded-xl p-1">
         <div className="px-6">
           <div className="flex justify-between items-center h-16">
@@ -56,7 +56,7 @@ function Navbar() {
                 </button>
                 
                 {isOpen && (
-                  <div className="absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                  <div className="absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-[60]">
                     <div className="absolute h-3 w-full -top-3"></div>
                     <Link
                       to="/testpage"
@@ -87,7 +87,7 @@ function Navbar() {
                   </button>
                   
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                    <div className="absolute right-0 w-48 bg-white rounded-md shadow-lg py-1 z-[60]">
                       <div className="absolute h-3 w-full -top-3"></div>
                       <div className="px-4 py-2 text-sm text-gray-700 border-b">
                         {user.email}

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import MapDisplay from '../../components/MapDisplay';
 import ListSection from '../../components/ListSection';
 import { useAuth } from '../../context/AuthContext';
@@ -6,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Testpage() {
   const [activeView, setActiveView] = useState('find');
+  const [eventLocations, setEventLocations] = useState([]);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -17,20 +19,46 @@ function Testpage() {
     }
   };
 
-  const eventLocations = [
-    {
-      id: 1,
-      lat: 34.0522,
-      lng: -118.2437,
-      title: "Downtown LA Event"
-    },
-    {
-      id: 2,
-      lat: 34.0211,
-      lng: -118.4937,
-      title: "Santa Monica Event"
-    }
-  ];
+  useEffect(() => {
+    // fetch the locatoin from the post / helprequest objects
+    const fetchLocations = async ()  => {
+      try {
+        let response; 
+        if (activeView === 'find') {
+          // "find" all the help offeres out there
+         response = await axios.get('/posts/get-all-help-offers'); 
+         const locations = response.data.posts.map( post => (
+          {
+            id: post._id,
+            lat: post.location.coordinates[1],
+            lng: post.location.coordinates[0],
+            title: post.title
+          }
+         ))
+         setEventLocations(locations); 
+        } 
+        else {
+          // "give" all the help requests out there
+          response = await axios.get('/help-requests/get-all-help-requests'); 
+          const locations = response.data.requests.map( helpRequest => (
+            {
+              id: helpRequest._id,
+              lat: helpRequest.location.coordinates[1],
+              lng: helpRequest.location.coordinates[0],
+              title: helpRequest.title
+            }
+          ))
+          setEventLocations(locations); 
+        }
+      } catch (error) {
+        console.error('Error fetching locations:', error);
+        setEventLocations([]);
+      }
+    };
+    fetchLocations();
+  }, [activeView]);
+
+  
 
   return (
     <div className="min-h-screen bg-gray-50 pt-24">

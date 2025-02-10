@@ -3,11 +3,7 @@ import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './MapDisplay.css';
 
-// Example location prop type:
-// locations = [
-//   { id: 1, lat: 34.0522, lng: -118.2437, title: "Event Name" },
-//   ...
-// ]
+
 
 function MapDisplay({ locations = [] }) {
   const mapContainer = useRef(null); // refs the DOM element where map will be rendered
