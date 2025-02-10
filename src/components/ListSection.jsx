@@ -24,9 +24,7 @@ function ListSection({ activeView }) {
           setHelpRequests([]);
         } else {
           const requestResponse = await axios.get('/help-requests/get-all-help-requests');
-          console.log('Help requests response:', requestResponse.data);
-          console.log('Current activeView:', activeView);
-          console.log('Setting helpRequests to:', requestResponse.data.helpRequests || []);
+          
           setHelpRequests(requestResponse.data.requests || []);
           setPosts([]);
         }

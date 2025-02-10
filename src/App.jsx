@@ -11,8 +11,9 @@ import SignUp from './pages/SignUp'
 import Testpage from './pages/testpage/Testpage'
 import RequestHelpForm from './components/RequestHelpForm'
 import PostHelpForm from './components/PostHelpForm'
+import HelpOfferDetail from './pages/HelpOfferDetail'
+import HelpRequestDetail from './pages/HelpRequestDetail'
 import About from './pages/About'
-
 // Components
 import Navbar from './components/Navbar'
 import ProtectedRoute from './routes/ProtectedRoutes'
@@ -52,6 +53,8 @@ function AppContent() {
             </ProtectedRoute>
           } 
         />
+        <Route path="/help-offer/:id" element={<HelpOfferDetail />} />
+        <Route path="/help-request/:id" element={<HelpRequestDetail />} />
       </Routes>
     </>
   );

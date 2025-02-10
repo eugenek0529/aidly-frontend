@@ -1,9 +1,15 @@
 import LocationIcon from './shared/LocationIcon';
 import MapLink from './shared/MapLink';
+import { useNavigate } from 'react-router-dom';
 
 function PostCard({ post }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer">
+    <div 
+      onClick={() => navigate(`/help-offer/${post._id}`)}
+      className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+    >
       <div className="flex justify-between items-center">
         <div className="flex-grow">
           <h3 className="text-lg font-medium text-gray-900 mb-1">
