@@ -1,5 +1,7 @@
 # Aidly
 
+Details about this project: https://medium.com/@eugenek0529/aidly-disaster-relief-platform-075fd01ceafc 
+
 Aidly is a full-stack web application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) to connect individuals seeking and offering help during disaster events.
 
 <img width="849" alt="landing" src="https://github.com/user-attachments/assets/c353da83-232b-4f9b-9ef7-ddcdc9073a03" />
